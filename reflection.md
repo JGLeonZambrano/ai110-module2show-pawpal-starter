@@ -5,7 +5,12 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+As per the design spec, there are four boxes: Owner, Pet, Scheduler, and Task. Each detail appropriate methods and attributes, and display the relationships between them. Scheduler reads what Owner defines about their Pet(s), then manages those pets using their Tasks.
 - What classes did you include, and what responsibilities did you assign to each?
+• Owner: holds name and preferences, owns one or more Pets, with an add_pet() method.
+• Pet: holds identifying info (name, species, description, notes) and a list of tasks, with add_task() and list_tasks() methods.
+• Task: defines whether it is complete or not, holding description, duration, priority, due time, and a mark_complete() method.
+• Scheduler: reads Owner and manages Pets based on owner preferences and each pet's tasks, with methods to sort by priority, detect conflicts, filter by time, and generate a schedule.
 
 **b. Design changes**
 
