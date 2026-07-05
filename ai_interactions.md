@@ -10,31 +10,22 @@
 
 **What task did you give the agent?**
 
-<!-- Describe the goal you asked the agent to accomplish -->
+Used Claude (claude.ai) as AI coding assistant for system design review, implementing scheduling algorithms, debugging, and adding stretch features including tabulate formatting and JSON persistence.
 
 **What did the agent do?**
 
-<!-- List the steps the agent took (files edited, commands run, etc.) -->
+- Reviewed the UML class design structure
+- Suggested and explained lambda functions for sorting
+- Generated pytest test cases for edge cases
+- Implemented save_to_json/load_from_json methods
+- Suggested tabulate formatting for CLI output
 
 **What did you have to verify or fix manually?**
 
-<!-- Describe anything the agent got wrong or that required human review -->
+- Removed incorrect `tasks` parameter from Pet.__init__
+- Fixed `mark_complete()` which incorrectly took a `task` parameter
+- Changed `self.description = []` to `self.description = description`
+- Kept dictionary-based priority sorting over AI's list suggestion
+- Fixed period instead of comma in Task.__init__ signature
+- Changed some naming conventions to elements that were easier to understand
 
----
-
-## Prompt Comparison (SF11)
-
-> Compare two different prompts (or two different models) on the same task.
-
-| | Option A | Option B |
-|-|----------|----------|
-| **Model / tool used** | | |
-| **Prompt** | | |
-| **Response summary** | | |
-| **What was useful** | | |
-| **Problems noticed** | | |
-| **Decision** | | |
-
-**Which approach did you use in your final implementation and why?**
-
-<!-- Your conclusion -->
