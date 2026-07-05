@@ -26,12 +26,16 @@ Note that Owver.preferences is never used for any Shceduling logic, and this cou
 **a. Constraints and priorities**
 
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
+Time (ie minutes) available in the day, completion status (whether the task is pending or done), and priority (See below)
 - How did you decide which constraints mattered most?
+Through the priority, as defined by the user. The logic is coded so that priority_order = {"high": 1, "medium": 2, "low": 3}, from which all else is organized around. This, because a pet owner should always complete critical care tasks (feeding, medication) before others (grooming, enrichment), regardless of time available.
 
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
+The scheduler stores data in memory via st.session_state, which means all pets and tasks are lost when the session ends.
 - Why is that tradeoff reasonable for this scenario?
+This is a reasonable tradeoff for a prototype but would need file or database persistence for real-world use. The scheduler checks for conflicts using exact due time matches only. If two tasks are at '08:00' it flags a conflict, but it does not detect overlapping durations (e.g., a 30-minute task at 08:00 and a 15-minute task at 08:20 would not be flagged). This is reasonable for a prototype where simplicity matters more than precision.
 
 ---
 
