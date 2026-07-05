@@ -56,26 +56,37 @@ Paste a sample of your app's CLI or Streamlit output here so a reader can see wh
 
 ```
 📅 Today's Schedule for Jordan:
-----------------------------------------
-  • Feed Mochi | 10 minutes | high priority | due on 08:00
-  • Morning walk | 30 minutes | high priority | due on 07:00
-  • Clean litter box | 15 minutes | medium priority | due on 09:00
-  • Play with automated toy | 10 minutes | medium priority | due on 09:30
+╭─────────────────────────┬────────────┬────────────┬───────╮
+│ Task                    │ Duration   │ Priority   │ Due   │
+├─────────────────────────┼────────────┼────────────┼───────┤
+│ Feed Mochi              │ 10 min     │ high       │ 08:00 │
+│ Morning walk            │ 30 min     │ high       │ 07:00 │
+│ Clean litter box        │ 15 min     │ medium     │ 09:00 │
+│ Play with automated toy │ 10 min     │ medium     │ 09:30 │
+╰─────────────────────────┴────────────┴────────────┴───────╯
 
 ✅ No conflicts detected.
 
 🕐 Tasks sorted by time:
-  • Morning walk | 30 minutes | high priority | due on 07:00
-  • Feed Mochi | 10 minutes | high priority | due on 08:00
-  • Clean litter box | 15 minutes | medium priority | due on 09:00
-  • Play with automated toy | 10 minutes | medium priority | due on 09:30
-  • Grooming | 45 minutes | low priority | due on 10:00
-  • Evening walk | 30 minutes | medium priority | due on 17:00
+╭─────────────────────────┬────────────┬────────────┬───────╮
+│ Task                    │ Duration   │ Priority   │ Due   │
+├─────────────────────────┼────────────┼────────────┼───────┤
+│ Morning walk            │ 30 min     │ high       │ 07:00 │
+│ Feed Mochi              │ 10 min     │ high       │ 08:00 │
+│ Clean litter box        │ 15 min     │ medium     │ 09:00 │
+│ Play with automated toy │ 10 min     │ medium     │ 09:30 │
+│ Grooming                │ 45 min     │ low        │ 10:00 │
+│ Evening walk            │ 30 min     │ medium     │ 17:00 │
+╰─────────────────────────┴────────────┴────────────┴───────╯
 
 🐱 Tasks for Mochi only:
-  • Feed Mochi | 10 minutes | high priority | due on 08:00
-  • Clean litter box | 15 minutes | medium priority | due on 09:00
-  • Play with automated toy | 10 minutes | medium priority | due on 09:30
+╭─────────────────────────┬────────────┬────────────┬───────╮
+│ Task                    │ Duration   │ Priority   │ Due   │
+├─────────────────────────┼────────────┼────────────┼───────┤
+│ Feed Mochi              │ 10 min     │ high       │ 08:00 │
+│ Clean litter box        │ 15 min     │ medium     │ 09:00 │
+│ Play with automated toy │ 10 min     │ medium     │ 09:30 │
+╰─────────────────────────┴────────────┴────────────┴───────╯
 ```
 
 ## 🧪 Testing PawPal+
@@ -108,6 +119,17 @@ verified. Invalid priority values not yet tested.
 | Filtering | `filter_by_time()`, `filter_by_pet()`, `filter_by_status()` | By time, pet name, or completion |
 | Conflict handling | `detect_conflicts()` | Returns warning message for duplicate times |
 | Recurring tasks | `mark_complete()` | Returns next Task instance if daily/weekly |
+
+## 🎨 Output Formatting
+
+PawPal+ uses the `tabulate` library to display schedules as professional rounded tables in the CLI, with columns for Task, Duration, Priority, and Due time.
+
+Functions using tabulate formatting:
+- `filter_by_time()` — main schedule display
+- `sort_by_time()` — chronological view
+- `filter_by_pet()` — per-pet task view
+
+Install: `pip3 install tabulate`
 
 ## 📸 Demo Walkthrough
 

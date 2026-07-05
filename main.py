@@ -1,4 +1,5 @@
 from pawpal_system import Task, Pet, Owner, Scheduler
+from tabulate import tabulate
 
 # Create Owner
 jordan = Owner("Jordan", "prefers morning tasks")
@@ -15,8 +16,6 @@ jordan.add_pet(biscuit)
 mochi.add_task(Task("Feed Mochi", 10, "high", "08:00"))
 mochi.add_task(Task("Clean litter box", 15, "medium", "09:00"))
 mochi.add_task(Task("Play with automated toy", 10, "medium", "09:30"))
-# Task to test overlapping tasks:
-# mochi.add_task(Task("Extra feeding", 10, "high", "07:00"))
 
 # Add tasks to Biscuit
 biscuit.add_task(Task("Morning walk", 30, "high", "07:00"))
@@ -26,22 +25,34 @@ biscuit.add_task(Task("Grooming", 45, "low", "10:00"))
 # Create Scheduler
 scheduler = Scheduler(jordan)
 
-# Generate schedule with 90 minutes available
+# Generate schedule with tabulate formatting
 print(f"\n📅 Today's Schedule for {jordan.name}:")
-print("-" * 40)
-schedule = scheduler.generate_schedule(90)
-for item in schedule:
-    print(f"  • {item}")
+schedule = scheduler.filter_by_time(90)
+table_data = [
+    [task.description, f"{task.duration_minutes} min", 
+     task.priority, task.due_time]
+    for task in schedule
+]
+headers = ["Task", "Duration", "Priority", "Due"]
+print(tabulate(table_data, headers=headers, tablefmt="rounded_outline"))
 
-# Check conflicts
+# Conflict detection
 print(f"\n{scheduler.detect_conflicts()}")
 
-# Demonstrate sort_by_time
+# Sort by time with tabulate
 print(f"\n🕐 Tasks sorted by time:")
-for task in scheduler.sort_by_time():
-    print(f"  • {task.get_details()}")
+time_data = [
+    [task.description, f"{task.duration_minutes} min",
+     task.priority, task.due_time]
+    for task in scheduler.sort_by_time()
+]
+print(tabulate(time_data, headers=headers, tablefmt="rounded_outline"))
 
-# Demonstrate filter_by_pet
+# Filter by pet
 print(f"\n🐱 Tasks for Mochi only:")
-for task in scheduler.filter_by_pet("Mochi"):
-    print(f"  • {task.get_details()}")
+mochi_data = [
+    [task.description, f"{task.duration_minutes} min",
+     task.priority, task.due_time]
+    for task in scheduler.filter_by_pet("Mochi")
+]
+print(tabulate(mochi_data, headers=headers, tablefmt="rounded_outline"))
