@@ -66,9 +66,6 @@ if st.button("Generate Schedule"):
         st.markdown("### Today's Schedule")
         for item in schedule:
             st.write(f"• {item}")
-        if conflicts:
-            st.warning("⚠️ Conflicts detected in your schedule!")
-        else:
-            st.success("✅ No conflicts detected!")
+        st.write(scheduler.detect_conflicts())
     else:
         st.info("Add pets and tasks first!")

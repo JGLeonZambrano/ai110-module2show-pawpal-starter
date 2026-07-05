@@ -1,16 +1,27 @@
 # Definition of tasks and other files
 
 class Task:
-    def __init__(self, description, duration_minutes, priority, due_time):
+    def __init__(self, description, duration_minutes, priority, due_time, frequency="none"):
         self.description = description #Stores the description of this Tas
         self.duration_minutes = duration_minutes #Stores the duration of the tasks in minutes
         self.priority = priority #Defines the priority status
         self.due_time = due_time #Defines the due time for this task
         self.is_complete = False #defines the status of the task, ie true (complete) or not
+        self.frequency = frequency  # "daily", "weekly", or "none" for each task
 
     def mark_complete(self):
-        """Changes the Task into is_complete == True when complete"""
+        """Marks task complete and schedules next occurrence if recurring."""
+        from datetime import datetime, timedelta
         self.is_complete = True
+        if self.frequency == "daily":
+            next_due = datetime.strptime(self.due_time, "%H:%M") + timedelta(days=1)
+            return Task(self.description, self.duration_minutes,
+                    self.priority, next_due.strftime("%H:%M"), "daily")
+        if self.frequency == "weekly":
+            next_due = datetime.strptime(self.due_time, "%H:%M") + timedelta(weeks=1)
+            return Task(self.description, self.duration_minutes,
+                    self.priority, next_due.strftime("%H:%M"), "weekly")
+        return None
     
     def get_details(self):
         """Returns the details of the specific task"""
@@ -64,6 +75,10 @@ class Scheduler:
         """Return the sorted list of all tasks, organized by a defined priority"""
         priority_order = {"high": 1, "medium": 2, "low": 3}
         return sorted(self.get_all_tasks(), key=lambda task:priority_order[task.priority])
+    
+    def sort_by_time(self):
+        """Returns all tasks sorted by due time (HH:MM format)"""
+        return sorted(self.get_all_tasks(), key=lambda task: task.due_time)
 
     def filter_by_time(self, available_minutes):
         """Filters tasks based on available minutes so that all are completed"""
@@ -77,15 +92,33 @@ class Scheduler:
         return tasks_filtered_by_time
     
     def detect_conflicts(self):
-        """Returns conflicts if tasks's due times generate issues"""
+        """Returns conflicts and a message if tasks's due times generate issues"""
         tasks_to_check = self.get_all_tasks() # Get all tasks related to the relevant Schedule
         due_times = [task.due_time for task in tasks_to_check] 
-        #There will be a conflict if the length of due_times is not equal to their set
-        conflicts = len(due_times) != len(set(due_times))
-        return conflicts
+        seen = []
+        conflicts = []
+        for task in tasks_to_check:
+            if task.due_time in seen:
+                conflicts.append(f"⚠️ Conflict: '{task.description}' overlaps at {task.due_time}")
+            seen.append(task.due_time)
+        if conflicts:
+            return "\n".join(conflicts)
+        return "✅ No conflicts detected."
     
     def generate_schedule(self, available_minutes):
         """Generates a schedule after filtering all times"""
         tasks_filtered_by_time = self.filter_by_time(available_minutes) #Get the tasks filtered by time
         return [task.get_details() for task in tasks_filtered_by_time]
+    
+    def filter_by_pet(self, pet_name):
+        """Returns only tasks belonging to a specific pet."""
+        for pet in self.pets:
+            if pet.name == pet_name:
+                return pet.list_tasks()
+        return []
+
+    def filter_by_status(self, complete=False):
+        """Returns tasks filtered by completion status."""
+        return [task for task in self.get_all_tasks() 
+                if task.is_complete == complete]
     

@@ -61,7 +61,7 @@ Paste a sample of your app's CLI or Streamlit output here so a reader can see wh
 ```bash
 # Run the full test suite:
 python3 -m pytest tests/test_pawpal.py -v
-
+```
 Sample test output:
 
 ```
@@ -79,23 +79,24 @@ tests/test_pawpal.py::test_task_addition PASSED                                 
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
-
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Task sorting | `sort_by_priority()`, `sort_by_time()` | Sorts high→medium→low or by HH:MM |
+| Filtering | `filter_by_time()`, `filter_by_pet()`, `filter_by_status()` | By time, pet name, or completion |
+| Conflict handling | `detect_conflicts()` | Returns warning message for duplicate times |
+| Recurring tasks | `mark_complete()` | Returns next Task instance if daily/weekly |
 
 ## 📸 Demo Walkthrough
 
 Describe your app in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+## 📸 Demo Walkthrough
+
+1. Run `python3 -m streamlit run app.py` to launch the app
+2. Enter owner name and preferences, click "Save Owner"
+3. Add a pet (name, species, description, notes), click "Add Pet"
+4. Add tasks to the pet (description, duration, priority, due time)
+5. Set available minutes and click "Generate Schedule"
+6. App displays today's schedule sorted by priority with conflict detection
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
