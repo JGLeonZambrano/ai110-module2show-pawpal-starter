@@ -16,7 +16,7 @@ As per the design spec, there are four boxes: Owner, Pet, Scheduler, and Task. E
 
 - Did your design change during implementation?
 No: the implementation matches the initial UML design exactly.
-Note that Owver.preferences is never used for any Shceduling logic, and this could later on create conflicts or be a springboard for another feature.
+Note that Owner.preferences is never used for any Scheduling logic, and this could later on create conflicts or be a springboard for another feature.
 - If yes, describe at least one change and why you made it.
 
 ---
@@ -44,12 +44,16 @@ This is a reasonable tradeoff for a prototype but would need file or database pe
 **a. How you used AI**
 
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
+Design, debugging, but also going over basics that require practice: I can ask for help in minutiae and can practice.
 - What kinds of prompts or questions were most helpful?
+Meditated ones that explicitly define what to do and what not to do.
 
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
+When asking for improvements on the Priorities: I was given an option that skipped the dictionary approach implemented as it was a bit more human readable, but prefered to keep the original design as it would be more efficient should this project grow in scope
 - How did you evaluate or verify what the AI suggested?
+First, reasoning based on context and knowledge. Then testing the suggestion outright in a controlled environment.
 
 ---
 
@@ -58,13 +62,16 @@ This is a reasonable tradeoff for a prototype but would need file or database pe
 **a. What you tested**
 
 - What behaviors did you test?
+The core class behaviors: task completion status changes, task addition to pets, sorting correctness by time, recurrence logic for daily tasks, conflict detection for duplicate due times, and edge cases like empty task lists and time-constrained filtering. 
 - Why were these tests important?
+These are important because they verify that the scheduler's core logic works as designed before connecting it to the UI.
 
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
+Confident in core behaviors, as 7 tests pass consistently. Less confident in edge cases involving invalid priority values or malformed time strings, which could cause KeyErrors or crashes.
 - What edge cases would you test next if you had more time?
-
+Next I would test: a pet with tasks spanning midnight (e.g., "23:00" and "00:30"), invalid priority strings, and concurrent sessions with multiple owners.
 ---
 
 ## 5. Reflection
@@ -72,11 +79,14 @@ This is a reasonable tradeoff for a prototype but would need file or database pe
 **a. What went well**
 
 - What part of this project are you most satisfied with?
+The conflict resolution: it took me time to understand the sugggested logic and then implement it, so it is nice seeing it in place
 
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
+I'd make the display of stored pets a bit more final-user friendly.
 
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+There is no point in using AI without a clear understanding of both overall goals and the grand architecture, because there is a tendency to baloon elements that and thus you can lose focus.
