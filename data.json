@@ -1,0 +1,70 @@
+{
+  "name": "Jordan",
+  "preferences": "prefers morning tasks",
+  "pets": [
+    {
+      "name": "Mochi",
+      "species": "cat",
+      "description": "fluffy and shy",
+      "notes": "allergic to fish",
+      "tasks": [
+        {
+          "description": "Feed Mochi",
+          "duration_minutes": 10,
+          "priority": "high",
+          "due_time": "08:00",
+          "is_complete": false,
+          "frequency": "none"
+        },
+        {
+          "description": "Clean litter box",
+          "duration_minutes": 15,
+          "priority": "medium",
+          "due_time": "09:00",
+          "is_complete": false,
+          "frequency": "none"
+        },
+        {
+          "description": "Play with automated toy",
+          "duration_minutes": 10,
+          "priority": "medium",
+          "due_time": "09:30",
+          "is_complete": false,
+          "frequency": "none"
+        }
+      ]
+    },
+    {
+      "name": "Biscuit",
+      "species": "dog",
+      "description": "energetic golden retriever",
+      "notes": "needs two walks daily",
+      "tasks": [
+        {
+          "description": "Morning walk",
+          "duration_minutes": 30,
+          "priority": "high",
+          "due_time": "07:00",
+          "is_complete": false,
+          "frequency": "none"
+        },
+        {
+          "description": "Evening walk",
+          "duration_minutes": 30,
+          "priority": "medium",
+          "due_time": "17:00",
+          "is_complete": false,
+          "frequency": "none"
+        },
+        {
+          "description": "Grooming",
+          "duration_minutes": 45,
+          "priority": "low",
+          "due_time": "10:00",
+          "is_complete": false,
+          "frequency": "none"
+        }
+      ]
+    }
+  ]
+}

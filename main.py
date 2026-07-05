@@ -56,3 +56,9 @@ mochi_data = [
     for task in scheduler.filter_by_pet("Mochi")
 ]
 print(tabulate(mochi_data, headers=headers, tablefmt="rounded_outline"))
+
+# Test persistence
+jordan.save_to_json("data.json")
+print("\n💾 Data saved to data.json!")
+loaded = Owner.load_from_json("data.json")
+print(f"✅ Loaded owner: {loaded.name} with {len(loaded.pets)} pets")

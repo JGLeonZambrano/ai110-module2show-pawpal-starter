@@ -66,3 +66,44 @@ def test_filter_by_time_empty():
     scheduler = Scheduler(owner)
     result = scheduler.filter_by_time(10)
     assert result == []
+def test_save_and_load_json():
+    """Verify save and load preserves owner, pets and tasks."""
+    import os
+    owner = Owner("Jordan", "prefers morning tasks")
+    pet = Pet("Mochi", "cat", "fluffy", "none")
+    pet.add_task(Task("Feed Mochi", 10, "high", "08:00"))
+    owner.add_pet(pet)
+    
+    # Save
+    owner.save_to_json("test_data.json")
+    
+    # Load
+    loaded = Owner.load_from_json("test_data.json")
+    
+    # Verify
+    assert loaded.name == "Jordan"
+    assert len(loaded.pets) == 1
+    assert loaded.pets[0].name == "Mochi"
+    assert len(loaded.pets[0].tasks) == 1
+    assert loaded.pets[0].tasks[0].description == "Feed Mochi"
+    
+    # Cleanup
+    os.remove("test_data.json")
+
+def test_load_preserves_task_attributes():
+    """Verify loaded tasks have correct attributes."""
+    import os
+    owner = Owner("Jordan", "preferences")
+    pet = Pet("Mochi", "cat", "fluffy", "none")
+    pet.add_task(Task("Feed Mochi", 10, "high", "08:00", "daily"))
+    owner.add_pet(pet)
+    owner.save_to_json("test_data2.json")
+    
+    loaded = Owner.load_from_json("test_data2.json")
+    task = loaded.pets[0].tasks[0]
+    
+    assert task.priority == "high"
+    assert task.frequency == "daily"
+    assert task.is_complete == False
+    
+    os.remove("test_data2.json")

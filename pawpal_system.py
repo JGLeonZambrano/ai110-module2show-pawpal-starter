@@ -61,6 +61,57 @@ class Owner:
         """Lists the entered Pets of this Owner"""
         return self.pets
     
+    def save_to_json(self, filename="data.json"):
+        """Saves owner, pets and tasks to a JSON file."""
+        import json
+        data = {
+            "name": self.name,
+            "preferences": self.preferences,
+            "pets": [
+                {
+                    "name": pet.name,
+                    "species": pet.species,
+                    "description": pet.description,
+                    "notes": pet.notes,
+                    "tasks": [
+                        {
+                            "description": task.description,
+                            "duration_minutes": task.duration_minutes,
+                            "priority": task.priority,
+                            "due_time": task.due_time,
+                            "is_complete": task.is_complete,
+                            "frequency": task.frequency
+                        }
+                        for task in pet.tasks
+                    ]
+                }
+                for pet in self.pets
+            ]
+        }
+        with open(filename, "w") as f:
+            json.dump(data, f, indent=2)
+
+    @classmethod
+    def load_from_json(cls, filename="data.json"):
+        """Loads owner, pets and tasks from a JSON file."""
+        import json
+        with open(filename, "r") as f:
+            data = json.load(f)
+        owner = cls(data["name"], data["preferences"])
+        for pet_data in data["pets"]:
+            pet = Pet(pet_data["name"], pet_data["species"],
+                    pet_data["description"], pet_data["notes"])
+            for task_data in pet_data["tasks"]:
+                pet.add_task(Task(
+                    task_data["description"],
+                    task_data["duration_minutes"],
+                    task_data["priority"],
+                    task_data["due_time"],
+                    task_data["frequency"]
+                ))
+            owner.add_pet(pet)
+        return owner
+
     
 class Scheduler:
     def __init__(self, owner):

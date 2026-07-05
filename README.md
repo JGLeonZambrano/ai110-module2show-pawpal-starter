@@ -98,18 +98,19 @@ python3 -m pytest tests/test_pawpal.py -v
 Sample test output:
 
 ```
-===== test session starts =====
-tests/test_pawpal.py::test_task_completion PASSED         [ 14%]
-tests/test_pawpal.py::test_task_addition PASSED           [ 28%]
-tests/test_pawpal.py::test_sort_by_time PASSED            [ 42%]
-tests/test_pawpal.py::test_recurrence_logic PASSED        [ 57%]
-tests/test_pawpal.py::test_conflict_detection PASSED      [ 71%]
-tests/test_pawpal.py::test_empty_pet_task_list PASSED     [ 85%]
-tests/test_pawpal.py::test_filter_by_time_empty PASSED    [100%]
-===== 7 passed in 0.02s =====
+tests/test_pawpal.py::test_task_completion PASSED              [ 11%]
+tests/test_pawpal.py::test_task_addition PASSED                [ 22%]
+tests/test_pawpal.py::test_sort_by_time PASSED                 [ 33%]
+tests/test_pawpal.py::test_recurrence_logic PASSED             [ 44%]
+tests/test_pawpal.py::test_conflict_detection PASSED           [ 55%]
+tests/test_pawpal.py::test_empty_pet_task_list PASSED          [ 66%]
+tests/test_pawpal.py::test_filter_by_time_empty PASSED         [ 77%]
+tests/test_pawpal.py::test_save_and_load_json PASSED           [ 88%]
+tests/test_pawpal.py::test_load_preserves_task_attributes PASSED [100%]
+========= 9 passed in 0.03s =========
 ```
-**Confidence Level:** ⭐⭐⭐⭐ (4/5) — Core behaviors and edge cases 
-verified. Invalid priority values not yet tested.
+**Confidence Level:** ⭐⭐⭐⭐⭐ (5/5) — Core behaviors, edge cases, 
+and data persistence all verified across 9 tests.
 
 ## 📐 Smarter Scheduling
 
@@ -130,6 +131,28 @@ Functions using tabulate formatting:
 - `filter_by_pet()` — per-pet task view
 
 Install: `pip3 install tabulate`
+
+## 💾 Data Persistence
+
+PawPal+ can save and load all owner, pet, and task data 
+between sessions using JSON.
+
+**How it works:**
+- `save_to_json(filename)` — converts all Owner, Pet and 
+  Task objects to a JSON file
+- `load_from_json(filename)` — reconstructs all objects 
+  from the saved file
+
+**Files modified:** `pawpal_system.py`, `data.json` (generated)
+
+**Usage:**
+```python
+# Save current state
+jordan.save_to_json("data.json")
+
+# Load in a new session
+jordan = Owner.load_from_json("data.json")
+```
 
 ## 📸 Demo Walkthrough
 
