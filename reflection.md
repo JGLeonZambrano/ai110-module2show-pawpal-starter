@@ -15,6 +15,8 @@ As per the design spec, there are four boxes: Owner, Pet, Scheduler, and Task. E
 **b. Design changes**
 
 - Did your design change during implementation?
+No: the implementation matches the initial UML design exactly.
+Note that Owver.preferences is never used for any Shceduling logic, and this could later on create conflicts or be a springboard for another feature.
 - If yes, describe at least one change and why you made it.
 
 ---

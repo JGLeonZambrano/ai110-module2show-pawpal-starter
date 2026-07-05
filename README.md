@@ -47,27 +47,34 @@ pip install -r requirements.txt
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
 ```
-# e.g.:
-# Daily plan for Biscuit (Golden Retriever):
-#   08:00 — Morning walk (30 min) [priority: high]
-#   09:00 — Feeding (10 min) [priority: high]
-#   ...
+📅 Today's Schedule for Jordan:
+----------------------------------------
+  • Feed Mochi | 10 minutes | high priority | due on 08:00
+  • Morning walk | 30 minutes | high priority | due on 07:00
+  • Clean litter box | 15 minutes | medium priority | due on 09:00
+  • Play with automated toy | 10 minutes | medium priority | due on 09:30
+⚠️  Conflicts detected: False
 ```
 
 ## 🧪 Testing PawPal+
 
 ```bash
 # Run the full test suite:
-pytest
-
-# Run with coverage:
-pytest --cov
-```
+python3 -m pytest tests/test_pawpal.py -v
 
 Sample test output:
 
 ```
-# Paste your pytest output here
+======================================== test session starts ========================================
+platform darwin -- Python 3.13.7, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/jgmaggi/Documents/CodePath A101/ai110-module2show-pawpal-starter
+collected 2 items                                                                                   
+
+tests/test_pawpal.py::test_task_completion PASSED                                             [ 50%]
+tests/test_pawpal.py::test_task_addition PASSED                                               [100%]
+
+========================================= 2 passed in 0.01s =========================================
 ```
 
 ## 📐 Smarter Scheduling
