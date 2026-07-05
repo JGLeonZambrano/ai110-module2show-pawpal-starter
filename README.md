@@ -65,17 +65,18 @@ python3 -m pytest tests/test_pawpal.py -v
 Sample test output:
 
 ```
-======================================== test session starts ========================================
-platform darwin -- Python 3.13.7, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
-cachedir: .pytest_cache
-rootdir: /Users/jgmaggi/Documents/CodePath A101/ai110-module2show-pawpal-starter
-collected 2 items                                                                                   
-
-tests/test_pawpal.py::test_task_completion PASSED                                             [ 50%]
-tests/test_pawpal.py::test_task_addition PASSED                                               [100%]
-
-========================================= 2 passed in 0.01s =========================================
+===== test session starts =====
+tests/test_pawpal.py::test_task_completion PASSED         [ 14%]
+tests/test_pawpal.py::test_task_addition PASSED           [ 28%]
+tests/test_pawpal.py::test_sort_by_time PASSED            [ 42%]
+tests/test_pawpal.py::test_recurrence_logic PASSED        [ 57%]
+tests/test_pawpal.py::test_conflict_detection PASSED      [ 71%]
+tests/test_pawpal.py::test_empty_pet_task_list PASSED     [ 85%]
+tests/test_pawpal.py::test_filter_by_time_empty PASSED    [100%]
+===== 7 passed in 0.02s =====
 ```
+**Confidence Level:** ⭐⭐⭐⭐ (4/5) — Core behaviors and edge cases 
+verified. Invalid priority values not yet tested.
 
 ## 📐 Smarter Scheduling
 
