@@ -58,14 +58,32 @@ st.divider()
 # Generate schedule
 st.subheader("📅 Generate Schedule")
 available_minutes = st.number_input("Available minutes today", min_value=10, max_value=480, value=90)
+sort_option = st.radio("Sort schedule by:", ["Priority", "Time"])
+
 if st.button("Generate Schedule"):
     if owner.pets:
         scheduler = Scheduler(owner)
-        schedule = scheduler.generate_schedule(available_minutes)
-        conflicts = scheduler.detect_conflicts()
-        st.markdown("### Today's Schedule")
-        for item in schedule:
-            st.write(f"• {item}")
-        st.write(scheduler.detect_conflicts())
+        if sort_option == "Priority":
+            scheduled_tasks = scheduler.filter_by_time(available_minutes)
+        else:
+            scheduled_tasks = scheduler.sort_by_time()
+        
+        st.markdown("### 📋 Today's Schedule")
+        table_data = [
+            {
+                "Task": task.description,
+                "Duration": f"{task.duration_minutes} min",
+                "Priority": task.priority,
+                "Due": task.due_time
+            }
+            for task in scheduled_tasks
+        ]
+        st.table(table_data)
+        
+        conflict_result = scheduler.detect_conflicts()
+        if "Conflict" in conflict_result:
+            st.warning(conflict_result)
+        else:
+            st.success(conflict_result)
     else:
         st.info("Add pets and tasks first!")

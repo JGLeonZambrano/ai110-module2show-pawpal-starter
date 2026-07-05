@@ -42,6 +42,14 @@ pip install -r requirements.txt
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
 
+## ✨ Features
+- Add owners, pets, and care tasks via a web UI
+- Generate daily schedules sorted by priority or time
+- Detect scheduling conflicts with warning messages
+- Filter tasks by pet, completion status, or available time
+- Recurring task support (daily and weekly)
+- 7 automated tests verifying core behaviors
+
 ## 🖥️ Sample Output
 
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
@@ -53,7 +61,21 @@ Paste a sample of your app's CLI or Streamlit output here so a reader can see wh
   • Morning walk | 30 minutes | high priority | due on 07:00
   • Clean litter box | 15 minutes | medium priority | due on 09:00
   • Play with automated toy | 10 minutes | medium priority | due on 09:30
-⚠️  Conflicts detected: False
+
+✅ No conflicts detected.
+
+🕐 Tasks sorted by time:
+  • Morning walk | 30 minutes | high priority | due on 07:00
+  • Feed Mochi | 10 minutes | high priority | due on 08:00
+  • Clean litter box | 15 minutes | medium priority | due on 09:00
+  • Play with automated toy | 10 minutes | medium priority | due on 09:30
+  • Grooming | 45 minutes | low priority | due on 10:00
+  • Evening walk | 30 minutes | medium priority | due on 17:00
+
+🐱 Tasks for Mochi only:
+  • Feed Mochi | 10 minutes | high priority | due on 08:00
+  • Clean litter box | 15 minutes | medium priority | due on 09:00
+  • Play with automated toy | 10 minutes | medium priority | due on 09:30
 ```
 
 ## 🧪 Testing PawPal+
@@ -89,15 +111,11 @@ verified. Invalid priority values not yet tested.
 
 ## 📸 Demo Walkthrough
 
-Describe your app in numbered steps so a reader can follow along without watching a video:
-
-## 📸 Demo Walkthrough
-
 1. Run `python3 -m streamlit run app.py` to launch the app
 2. Enter owner name and preferences, click "Save Owner"
 3. Add a pet (name, species, description, notes), click "Add Pet"
 4. Add tasks to the pet (description, duration, priority, due time)
-5. Set available minutes and click "Generate Schedule"
-6. App displays today's schedule sorted by priority with conflict detection
+5. Choose to sort by Priority or Time, set available minutes, click "Generate Schedule"
+6. App displays today's schedule as a table with conflict detection
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
